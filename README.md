@@ -7,7 +7,7 @@ docker-compose up --build
 ```
 una vez los contenedores esten corriendo ejecutar los siguientes comandos para correr las migraciones:
 ```
-docker-compose exec raffle_api bash
+docker-compose exec app bash
 ./manage.py makemigrations
 ./manage.py migrate
 ```
