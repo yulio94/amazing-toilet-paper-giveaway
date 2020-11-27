@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - .env_var/app.env
+    ports:
+      - 8000:8000
+    volumes:
+      - $PWD/backend:/usr/src/app
+    depends_on:
+      - db
+      - broker
+
+  db:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    env_file:
+      - .env_var/db.env 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  broker:
+    image: rabbitmq:3
+    ports:
+      - 5672:5672
+    env_file:
+      - .env_var/msbroker.env 
+
+volumes:
+  postgres_data:
+
