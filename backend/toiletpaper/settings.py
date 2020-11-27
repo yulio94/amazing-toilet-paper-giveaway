@@ -29,10 +29,11 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'django_restframework',
+    'rest_framework',
 ]
 
 PROJECT_APPS = [
+    'apps.users',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -52,7 +53,7 @@ ROOT_URLCONF = 'toiletpaper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,6 +118,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Auth model
+AUTH_USER_MODEL = 'users.User'
+
 # Email backend configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
@@ -127,4 +131,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # Celery broker configuration.
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = 'amqp'
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')

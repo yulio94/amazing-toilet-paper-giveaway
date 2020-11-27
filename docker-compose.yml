@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
       - broker
-
+  
   db:
     image: postgres:12
     ports:
